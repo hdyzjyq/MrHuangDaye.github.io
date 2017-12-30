@@ -1,0 +1,599 @@
+<values>
+
+/showsummaryfeedback = true
+
+</values>
+
+
+
+
+<item attributeAlabel>
+
+/1 = "积极"
+
+</item>
+
+
+
+<item attributeA>
+
+/1 = "诚实"
+/2 = "自信"
+/3 = "可爱"
+/4 = "伶俐"
+/5 = "高贵"
+/6 = "高尚"
+/7 = "聪明"
+/8 = "漂亮"
+/9 = "成功"
+/10 = "强壮"
+
+</item>
+
+
+
+<item attributeBlabel>
+
+/1 = "消极"
+
+</item>
+
+
+
+<item attributeB>
+
+/1 = "罪恶"
+/2 = "卑鄙"
+/3 = "无能"
+/4 = "愚蠢"
+/5 = "失败"
+/6 = "讨厌"
+/7 = "笨拙"
+/8 = "可恨"
+/9 = "陈腐"
+/10 = "丑陋"
+
+</item>
+
+
+
+<item targetAlabel>
+
+/1 = "自我"
+
+</item>
+
+
+
+<item targetA>
+
+/1 = "俺"
+/2 = "俺的"
+/3 = "自己"
+/4 = "自己的"
+/5 = "自个"
+/6 = "自个的"
+/7 = "我"
+/8 = "我的"
+/9 = "本人"
+/10 = "本人的"
+
+</item>
+
+
+
+<item targetBlabel>
+
+/1 = "他人"
+
+</item>
+
+
+
+<item targetB>
+
+/1 = "他"
+/2 = "他的"
+/3 = "别人"
+/4 = "别人的"
+/5 = "人家"
+/6 = "人家的"
+/7 = "外人"
+/8 = "外人的"
+/9 = "他人"
+/10 = "他人的"
+
+</item>
+
+
+
+
+<defaults>
+
+/ fontstyle = ("Arial", 3.5%)
+
+/ screencolor = (0,0,0)
+
+/ txbgcolor = (0,0,0)
+
+/ txcolor = (255, 255, 255)
+
+/ minimumversion = "4.0.0.0"
+
+/ canvasaspectratio = (4, 3)
+
+</defaults>
+
+
+
+<values>
+
+/ completed = 0
+
+/ sum1a = 0
+
+/ sum2a = 0
+
+/ sum1b = 0
+
+/ sum2b = 0
+
+/ n1a = 0
+
+/ n2a = 0
+
+/ n1b = 0
+
+/ n2b = 0
+
+/ ss1a = 0
+
+/ ss2a = 0
+
+/ ss1b = 0
+
+/ ss2b = 0
+
+/ magnitude = "unknown"
+
+/ n_correct = 0
+
+</values>
+
+
+
+
+<expressions>
+
+/ m1a = values.sum1a / values.n1a
+
+/ m2a = values.sum2a / values.n2a
+
+/ m1b = values.sum1b / values.n1b
+
+/ m2b = values.sum2b / values.n2b
+
+/ sd1a = sqrt((values.ss1a - (values.n1a * (expressions.m1a * expressions.m1a))) / (values.n1a - 1))
+
+/ sd2a = sqrt((values.ss2a - (values.n2a * (expressions.m2a * expressions.m2a))) / (values.n2a - 1))
+
+/ sd1b = sqrt((values.ss1b - (values.n1b * (expressions.m1b * expressions.m1b))) / (values.n1b - 1))
+
+/ sd2b = sqrt((values.ss2b - (values.n2b * (expressions.m2b * expressions.m2b))) / (values.n2b - 1))
+
+/ sda = sqrt((((values.n1a - 1) * (expressions.sd1a * expressions.sd1a) + (values.n2a - 1) * (expressions.sd2a * expressions.sd2a)) + ((values.n1a + values.n2a) * ((expressions.m1a - expressions.m2a) * (expressions.m1a - expressions.m2a)) / 4) ) / (values.n1a + values.n2a - 1) )
+
+/ sdb = sqrt((((values.n1b - 1) * (expressions.sd1b * expressions.sd1b) + (values.n2b - 1) * (expressions.sd2b * expressions.sd2b)) + ((values.n1b + values.n2b) * ((expressions.m1b - expressions.m2b) * (expressions.m1b - expressions.m2b)) / 4) ) / (values.n1b + values.n2b - 1) )
+
+/ da = (m2a - m1a) / expressions.sda
+
+/ db = (m2b - m1b) / expressions.sdb
+
+/ d = (expressions.da + expressions.db) / 2
+
+/ preferred = "unknown"
+
+/ notpreferred = "unknown"
+
+/ percentcorrect = (values.n_correct/ (values.n1a + values.n1b + values.n2a + values.n2b)) * 100
+
+</expressions>
+
+
+
+
+
+
+
+<data>
+
+/ file = "neiyinzizunIAT_rawdata.iqdat"
+
+/ columns = [date, time, group, subject, blockcode, blocknum, trialcode, trialnum, response, correct, latency, 
+
+stimulusnumber, stimulusitem, expressions.da, expressions.db, expressions.d, expressions.percentcorrect ]
+
+/ separatefiles = true
+
+</data>
+
+
+
+
+
+
+
+<trial instructions>
+
+/ stimulustimes = [1=instructions, spacebar]
+
+/ correctresponse = (" ")
+
+/ errormessage = false
+
+/ recorddata = false
+
+</trial>
+
+
+
+<text instructions>
+
+/ items = instructions
+
+/ hjustify = left
+
+/ size = (90%, 60%)
+
+/ position = (50%, 85%)
+
+/ valign = bottom
+
+/ select = sequence
+
+/ resetinterval = 20
+
+</text>
+
+
+
+<item instructions>
+
+/ 1 = "
+
+练习部分
+
+您好，欢迎参加我们的实验！
+
+在接下来的实验中，屏幕中央将会呈现一系列的词语，你的任务是对词语进行辨别归类并按键反应。如果词语属于左侧词语描述的范畴之内，请按“F”键；如果词语属于右侧词语描述的范畴之内，请按“J”键。请尽量快速准确的做出反应。
+"
+/ 2 = "
+
+练习部分
+
+如屏幕上方所示，词语位置已经改变，接下来呈现的词汇也将改变。
+
+按键规则不变。
+"
+/ 3 = "
+
+练习部分
+
+如屏幕上方所示，词语已经改变，接下来呈现的词汇也将改变。
+
+按键规则不变。
+"
+
+/ 4 = "
+
+练习部分
+
+如屏幕上方所示，词语位置已经改变，接下来呈现的词汇也将改变。
+
+按键规则不变。
+"
+/ 5 = "
+
+练习部分
+
+如屏幕上方所示，词语现已进行分组，请根据分组，将接下来呈现的词汇进行归类。
+
+按键规则不变。
+"
+/ 6 = "
+
+正式实验
+
+如屏幕上方所示，请根据词语分组，将接下来呈现的词汇进行归类。
+
+按键规则不变。
+"
+/ 7 = "
+
+练习部分
+
+如屏幕上方所示，词语分组已经改变，请根据分组，将接下来呈现的词汇进行归类。
+
+按键规则不变。
+"
+/ 8 ="
+
+正式实验
+
+如屏幕上方所示，请根据词语分组，将接下来呈现的词汇进行归类。
+
+按键规则不变。
+"
+/ 9 ="实验结束，感谢您参与我们的实验！"
+</item>
+
+
+
+<text spacebar>
+
+/ items = ("请按空格键继续")
+
+/ position = (50%, 95%)
+
+/ valign = bottom
+
+</text>
+
+
+
+<text attributeA>
+
+/ items = attributeA
+
+/ fontstyle = ("Arial", 5%)
+
+/ txcolor = (0, 255, 0)
+
+</text>
+
+
+
+<text attributeB>
+
+/ items = attributeB
+
+/ fontstyle = ("Arial", 5%)
+
+/ txcolor = (0, 255, 0)
+
+</text>
+
+
+
+<text targetB>
+
+/ items = targetB
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text targetA>
+
+/ items = targetA
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text error>
+
+/ position = (50%, 75%)
+
+/ items = ("X")
+
+/ color = (255, 0, 0)
+
+/ fontstyle = ("Arial", 10%, true)
+
+</text>
+
+
+
+<text attributeAleft>
+
+/ items = attributeAlabel
+
+/ valign = top
+
+/ halign = left
+
+/ position = (5%, 5%)
+
+/ txcolor = (0, 255, 0)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+<text attributeAright>
+
+/ items = attributeAlabel
+
+/ valign = top
+
+/ halign = right
+
+/ position = (95%, 5%)
+
+/ txcolor = (0, 255, 0)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+<text attributeBleft>
+
+/ items = attributeBlabel
+
+/ valign = top
+
+/ halign = left
+
+/ position = (5%, 5%)
+
+/ txcolor = (0, 255, 0)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+<text attributeBright>
+
+/ items = attributeBlabel
+
+/ valign = top
+
+/ halign = right
+
+/ position = (95%, 5%)
+
+/ txcolor = (0, 255, 0)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text attributeAleftmixed>
+
+/ items = attributeAlabel
+
+/ valign = top
+
+/ halign = left
+
+/ position = (5%, 19%)
+
+/ txcolor = (0, 255, 0)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text attributeBrightmixed>
+
+/ items = attributeBlabel
+
+/ valign = top
+
+/ halign = right
+
+/ position = (95%, 19%)
+
+/ txcolor = (0, 255, 0)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text targetBleft>
+
+/ items = targetBlabel
+
+/ valign = top
+
+/ halign = left	
+
+/ position = (5%, 5%)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text targetBright>
+
+/ items = targetBlabel
+
+/ valign = top
+
+/ halign = right
+
+/ position = (95%, 5%)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text targetAleft>
+
+/ items = targetAlabel
+
+/ valign = top
+
+/ halign = left
+
+/ position = (5%, 5%)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text targetAright>
+
+/ items = targetAlabel
+
+/ valign = top
+
+/ halign = right
+
+/ position = (95%, 5%)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text orleft>
+
+/ items = ("or")
+
+/ valign = top
+
+/ halign = left
+
+/ position = (5%, 12%)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
+
+
+
+<text orright>
+
+/ items = ("or")
+
+/ valign = top
+
+/ halign = right
+
+/ position = (95%, 12%)
+
+/ fontstyle = ("Arial", 5%)
+
+</text>
