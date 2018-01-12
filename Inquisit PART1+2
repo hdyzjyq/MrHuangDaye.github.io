@@ -597,3 +597,342 @@ stimulusnumber, stimulusitem, expressions.da, expressions.db, expressions.d, exp
 / fontstyle = ("Arial", 5%)
 
 </text>
+
+<trial attributeA>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("F")
+
+/ stimulusframes = [1 = attributeA]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+
+<trial attributeAright>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("J")
+
+/ stimulusframes = [1 = attributeA]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+
+<trial attributeB>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("J")
+
+/ stimulusframes = [1 = attributeB]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+<trial attributeBleft>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("F")
+
+/ stimulusframes = [1 = attributeB]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+<trial targetBleft>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("F")
+
+/ stimulusframes = [1 = targetB]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+
+<trial targetBright>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("J")
+
+/ stimulusframes = [1 = targetB]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+
+<trial targetAleft>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("F")
+
+/ stimulusframes = [1 = targetA]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+
+<trial targetAright>
+
+/ validresponse = ("F", "J")
+
+/ correctresponse = ("J")
+
+/ stimulusframes = [1 = targetA]
+
+/ posttrialpause = 250
+
+</trial>
+
+
+
+<block attributepractice>
+
+/ bgstim = (attributeAleft, attributeBright)
+
+/ trials = [1=instructions;2-21 = random(attributeA, attributeB)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+</block>
+
+
+<block attributepracticejiaohuan>
+
+/ bgstim = (attributeAright, attributeBleft)
+
+/ trials = [1=instructions;2-21 = random(attributeAright, attributeBleft)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+</block>
+
+
+<block targetcompatiblepractice>
+
+/ bgstim = (targetAleft, targetBright)
+
+/ trials = [1=instructions;2-21 = random(targetAleft, targetBright)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+</block>
+
+
+
+<block targetincompatiblepractice>
+
+/ bgstim = (targetAright, targetBleft)
+
+/ trials = [1=instructions;2-21 = random(targetAright, targetBleft)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+</block>
+
+
+
+<block compatibletest1>
+
+/ bgstim = (targetAleft, orleft, attributeAleftmixed, targetBright, orright, attributeBrightmixed)
+
+/ trials = [1=instructions;
+
+  3,5,7,9,11,13,15,17,19,21= random(targetAleft, targetBright);
+
+  2,4,6,8,10,12,14,16,18,20 = random(attributeA, attributeB)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+/ ontrialend = [if(block.compatibletest1.latency  <= 10000 && block.compatibletest1.currenttrialnumber != 1 ) values.sum1a =  values.sum1a + block.compatibletest1.latency]
+
+/ ontrialend = [if(block.compatibletest1.latency  <= 10000 && block.compatibletest1.currenttrialnumber != 1 ) values.n1a +=  1]
+
+/ ontrialend = [if(block.compatibletest1.latency  <= 10000 && block.compatibletest1.currenttrialnumber != 1 ) values.ss1a =  values.ss1a + (block.compatibletest1.latency * block.compatibletest1.latency)]
+
+/ ontrialend = [if(block.compatibletest1.latency  <= 10000 && block.compatibletest1.currenttrialnumber != 1 ) values.n_correct += block.compatibletest1.correct]
+
+</block>
+
+
+
+<block compatibletest2>
+
+/ bgstim = (targetAleft, orleft, attributeAleftmixed, targetBright, orright, attributeBrightmixed)
+
+/ trials = [
+
+  2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40 = random(targetAleft, targetBright);
+
+  1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39 = random(attributeA, attributeB)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+/ ontrialend = [if(block.compatibletest2.latency  <= 10000) values.sum1b =  values.sum1b + block.compatibletest2.latency]
+
+/ ontrialend = [if(block.compatibletest2.latency  <= 10000) values.n1b += 1]
+
+/ ontrialend = [if(block.compatibletest2.latency  <= 10000) values.ss1b =  values.ss1b + (block.compatibletest2.latency * block.compatibletest2.latency)]
+
+/ ontrialend = [if(block.compatibletest2.latency  <= 10000) values.n_correct += block.compatibletest2.correct]
+
+</block>
+
+
+
+<block incompatibletest1>
+
+/ bgstim = (targetBleft, orleft, attributeAleftmixed, targetAright, orright, attributeBrightmixed)
+
+/ trials = [1=instructions;
+
+  3,5,7,9,11,13,15,17,19,21 = random(targetBleft, targetAright);
+
+  2,4,6,8,10,12,14,16,18,20 = random(attributeA, attributeB)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+/ ontrialend = [if(block.incompatibletest1.latency  <= 10000 && block.incompatibletest1.currenttrialnumber != 1) values.sum2a =  values.sum2a + block.incompatibletest1.latency]
+
+/ ontrialend = [if(block.incompatibletest1.latency  <= 10000 && block.incompatibletest1.currenttrialnumber != 1 ) values.n2a +=  1]
+
+/ ontrialend = [if(block.incompatibletest1.latency  <= 10000 && block.incompatibletest1.currenttrialnumber != 1 ) values.ss2a =  values.ss2a + (block.incompatibletest1.latency * block.incompatibletest1.latency)]
+
+/ ontrialend = [if(block.incompatibletest1.latency  <= 10000 && block.incompatibletest1.currenttrialnumber != 1 ) values.n_correct += block.incompatibletest1.correct]
+
+</block>
+
+
+
+<block incompatibletest2>
+
+/ bgstim = (targetBleft, orleft, attributeAleftmixed, targetAright, orright, attributeBrightmixed)
+
+/ trials = [
+
+  2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32,34,36,38,40 = random(targetBleft, targetAright);
+
+  1,3,5,7,9,11,13,15,17,19,21,23,25,27,29,31,33,35,37,39 = random(attributeA, attributeB)]
+
+/ errormessage = true(error,200)
+
+/ responsemode = correct
+
+/ ontrialend = [if(block.incompatibletest2.latency  <= 10000) values.sum2b =  values.sum2b + block.incompatibletest2.latency]
+
+/ ontrialend = [if(block.incompatibletest2.latency  <= 10000) values.n2b +=  1]
+
+/ ontrialend = [if(block.incompatibletest2.latency  <= 10000) values.ss2b =  values.ss2b + (block.incompatibletest2.latency * block.incompatibletest2.latency)]
+
+/ ontrialend = [if(block.incompatibletest2.latency  <= 10000) values.n_correct += block.incompatibletest2.correct]
+
+</block>
+
+
+
+
+
+<block compatibletestinstructions>
+
+/ bgstim = (targetAleft, orleft, attributeAleftmixed, targetBright, orright, attributeBrightmixed)
+
+/ trials = [1=instructions]
+
+/ recorddata = false
+
+</block>
+
+
+
+<block incompatibletestinstructions>
+
+/ bgstim = (targetBleft, orleft, attributeAleftmixed, targetAright, orright, attributeBrightmixed)
+
+/ trials = [1=instructions]
+
+/ recorddata = false
+
+</block>
+
+
+
+<block summary>
+
+
+/ trials = [1=instructions]
+
+/ recorddata = false
+
+</block>
+
+
+<expt>
+
+/subjects = (1 of 2)
+
+/groupassignment = groupnumber
+
+/ blocks = [1=targetcompatiblepractice; 2=targetincompatiblepractice; 3=attributepractice; 4=attributepracticejiaohuan;
+
+				5=compatibletest1; 6=compatibletestinstructions; 7=compatibletest2; 8=incompatibletest1;
+
+				9=incompatibletestinstructions; 10=incompatibletest2; 11=summary]
+
+/onexptend = [values.completed = 1]
+
+</expt>
+
+
+
+<expt>
+
+/subjects = (2 of 2)
+
+/groupassignment = groupnumber
+
+/ blocks =[1=targetcompatiblepractice; 2=targetincompatiblepractice; 3=attributepractice; 4=attributepracticejiaohuan;
+
+				5=incompatibletest1;
+
+				6=incompatibletestinstructions; 7=incompatibletest2;8=compatibletest1; 9=compatibletestinstructions; 10=compatibletest2; 11=summary]
+
+
+/onexptend = [values.completed = 1]
+
+</expt>
